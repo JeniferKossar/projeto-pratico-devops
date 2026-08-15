@@ -1,3 +1,4 @@
 Linha 1: Acordar e dar ração.
 Linha 2: Trocar a água da vasilha.
 Linha 3: Hora do passeio na rua
+Linha 4: Brincar com os brinquedos dele.
