@@ -1,0 +1,24 @@
+name: Continuos Delivery
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  deliver:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          # Baixa o histórico completo para o Super-Linter saber o que mudou
+          fetch-depth: 0
+      - name: Simulando Continuous Delivery
+        uses: actions/upload-artifact@v7
+        with:
+          name: projeto.zip
+          path: |
+            meu_projeto.txt
+            rotina_castiel.txt
+            README.md
+          
