@@ -1,8 +1,9 @@
 name: Continuos Deployment
 
 on:
-  push:
-    branches: [ "main" ]
+  pull_request:
+    branches:
+      - main
 
 jobs:
   deliver:
@@ -33,7 +34,7 @@ jobs:
       run: ls -R
       
   docker:
-    needs: deliver
+    needs: deploy
     runs-on: ubuntu-latest
     steps:
       -
