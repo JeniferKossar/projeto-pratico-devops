@@ -20,8 +20,9 @@ jobs:
           VALIDATE_ALL_CODEBASE: false
           DEFAULT_BRANCH: "main"
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
- docker:
+          
+jobs:
+  docker:
     needs: build
     runs-on: ubuntu-latest
     steps:
@@ -38,29 +39,17 @@ jobs:
           context: .
           push: false
           tags: user/app:latest
-
+name: Discord
+on:
+  - push
+jobs:
   discord:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Set up Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: '20'
-
       - name: Run Discord Webhook
-        uses: Sniddle/discord-webhook@v2
+        uses: Sniddl/discord-commits@v1.6
         with:
-          webhook_url: ${{ secrets.DISCORD_WEBHOOK }}
-          template: |
-            {
-              "username": "GitHub Actions",
-              "embeds": [
-                {
-                  "title": "Build Status",
-                  "description": "The build has completed successfully.",
-                  "color": 3066993
-                }
-              ]
-            }
-          include_env: true
+          webhook: ${{ secrets.DISCORD_WEBHOOK }}
+          template: 'avatar-with-link'
+          include-extras: true
