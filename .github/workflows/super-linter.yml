@@ -49,6 +49,18 @@ jobs:
           node-version: '20'
 
       - name: Run Discord Webhook
-        uses: johnnyhuy/actions-discord-git-webhook@main
+        uses: Sniddle/discord-webhook@v2
         with:
           webhook_url: ${{ secrets.DISCORD_WEBHOOK }}
+          template: |
+            {
+              "username": "GitHub Actions",
+              "embeds": [
+                {
+                  "title": "Build Status",
+                  "description": "The build has completed successfully.",
+                  "color": 3066993
+                }
+              ]
+            }
+          include_env: true
