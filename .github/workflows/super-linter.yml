@@ -21,35 +21,22 @@ jobs:
           DEFAULT_BRANCH: "main"
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           
-jobs:
   docker:
     needs: build
     runs-on: ubuntu-latest
     steps:
-      -
-        name: Set up QEMU
+      - name: Checkout code (Baixar os arquivos)
+        uses: actions/checkout@v4
+
+      - name: Set up QEMU
         uses: docker/setup-qemu-action@v4
-      -
-        name: Set up Docker Buildx
+
+      - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v4
 
-      - name: Build
+      - name: Build Docker Image
         uses: docker/build-push-action@v6
         with:
           context: .
           push: false
-          tags: user/app:latest
-name: Discord
-on:
-  - push
-jobs:
-  discord:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - name: Run Discord Webhook
-        uses: Sniddl/discord-commits@v1.6
-        with:
-          webhook: ${{ secrets.DISCORD_WEBHOOK }}
-          template: 'avatar-with-link'
-          include-extras: true
+          tags: meu-projeto-devops:latest
