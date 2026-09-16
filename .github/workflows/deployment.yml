@@ -22,7 +22,6 @@ jobs:
             meu_projeto.txt
             rotina_castiel.txt
             README.md
-            *.py
 
   deploy:
     runs-on: ubuntu-latest
